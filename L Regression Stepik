@@ -1,0 +1,20 @@
+#https://stepic.org/media/attachments/lesson/16462/boston_houses.csv
+
+import urllib
+from urllib import request
+import numpy as np
+
+fname = input()  # read file name from stdin
+f = urllib.request.urlopen(fname)  # open file from URL
+data = np.loadtxt(f, delimiter=',', skiprows=1)  # load data to work with
+
+
+e=np.ones((data.shape[0],1))
+#print(e)
+x=np.hstack((e,data[:,1:]))
+#print(x)
+
+
+b=np.dot(np.dot(np.linalg.inv(np.dot(x.transpose(),x)),x.transpose()),data[:,0])
+b=map(str,b)
+print(" ".join(b))
